@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginScreen } from './screens/LoginScreen';
 import { MarketplaceScreen } from 'screens/MarketplaceScreen';
 import './global.css';
+import BusinessPage from 'screens/BusinessPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +67,7 @@ export default function App() {
       >
         <Stack.Screen name="Login" component={LoginScreenWrapper} />
         <Stack.Screen name="Marketplace" component={MarketplaceScreen} />
+        <Stack.Screen name="BusinessPage" component={BusinessPage} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

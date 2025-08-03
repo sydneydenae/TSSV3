@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, FlatList, StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Header } from 'components/organisms/Header';
 import { SearchBar } from 'components/molecules/SearchBar';
 import { CategoryTabs } from 'components/molecules/CategoryTabs';
@@ -11,6 +12,7 @@ interface Product {
   image: any;
   serviceName: string;
   businessName: string;
+  businessId: string;
   price: string;
   location: string;
 }
@@ -27,6 +29,7 @@ const defaultProducts: Product[] = [
     image: require('../assets/product1.png'),
     serviceName: 'Math Tutoring',
     businessName: 'Academic Excellence Center',
+    businessId: 'business-1',
     price: '$25/hour',
     location: 'Downtown'
   },
@@ -35,6 +38,7 @@ const defaultProducts: Product[] = [
     image: require('../assets/product2.png'),
     serviceName: 'Science Lab Equipment',
     businessName: 'STEM Supplies Co.',
+    businessId: 'business-2',
     price: '$150',
     location: 'University District'
   },
@@ -43,6 +47,7 @@ const defaultProducts: Product[] = [
     image: require('../assets/product3.png'),
     serviceName: 'English Literature Books',
     businessName: 'Campus Bookstore',
+    businessId: 'business-3',
     price: '$45',
     location: 'Campus Center'
   },
@@ -51,6 +56,7 @@ const defaultProducts: Product[] = [
     image: require('../assets/product4.png'),
     serviceName: 'Laptop Repair',
     businessName: 'Tech Solutions',
+    businessId: 'business-4',
     price: '$75',
     location: 'Tech Hub'
   }
@@ -63,6 +69,7 @@ export const MarketplaceScreen = ({
   onProductPress,
   products = defaultProducts
 }: MarketplaceScreenProps) => {
+  const navigation = useNavigation();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -105,9 +112,14 @@ export const MarketplaceScreen = ({
       image={item.image}
       serviceName={item.serviceName}
       businessName={item.businessName}
+      businessId={item.businessId}
       price={item.price}
       location={item.location}
       onPress={() => onProductPress?.(item)}
+      onBusinessNamePress={(businessId) => {
+        // @ts-ignore - Navigation typing issue
+        navigation.navigate('BusinessPage', { businessId });
+      }}
       className="mb-4"
     />
   );

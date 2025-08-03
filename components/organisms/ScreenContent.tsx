@@ -1,25 +1,48 @@
-import { Text, View } from 'react-native';
-
-import { EditScreenInfo } from '../EditScreenInfo';
+import React from 'react';
+import { View, ScrollView } from 'react-native';
+import { Text } from 'components/atoms/Text';
 
 type ScreenContentProps = {
-  title: string;
-  path: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
+  title?: string;
+  path?: string;
+  className?: string;
+  contentContainerClassName?: string;
+  showsVerticalScrollIndicator?: boolean;
 };
 
-export const ScreenContent = ({ title, path, children }: ScreenContentProps) => {
+export default function ScreenContent({
+  children,
+  title,
+  path,
+  className = '',
+  contentContainerClassName = '',
+  showsVerticalScrollIndicator = false
+}: ScreenContentProps) {
   return (
-    <View className={styles.container}>
-      <Text className={styles.title}>{title}</Text>
-      <View className={styles.separator} />
-      <EditScreenInfo path={path} />
-      {children}
-    </View>
+    <ScrollView
+      className={`flex-1 ${className}`}
+      contentContainerStyle={{ flexGrow: 1 }}
+      showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+    >
+      <View className={`px-4 py-6 ${contentContainerClassName}`}>
+        {/* Optional Title */}
+        {title && (
+          <Text variant="heading" className="text-2xl font-bold mb-4 text-gray-900">
+            {title}
+          </Text>
+        )}
+        
+        {/* Optional Path for Developer Context */}
+        {path && (
+          <Text variant="caption" className="text-xs text-gray-400 mb-2">
+            {path}
+          </Text>
+        )}
+        
+        {/* Content */}
+        {children}
+      </View>
+    </ScrollView>
   );
-};
-const styles = {
-  container: `items-center flex-1 justify-center`,
-  separator: `h-[1px] my-7 w-4/5 bg-gray-200`,
-  title: `text-xl font-bold`,
-};
+}

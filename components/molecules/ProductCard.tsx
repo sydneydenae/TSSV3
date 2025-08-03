@@ -7,9 +7,11 @@ interface ProductCardProps {
   image: ImageSourcePropType;
   serviceName: string;
   businessName: string;
+  businessId: string;
   price: string;
   location: string;
   onPress?: () => void;
+  onBusinessNamePress?: (businessId: string) => void;
   className?: string;
 }
 
@@ -17,9 +19,11 @@ export const ProductCard = ({
   image,
   serviceName,
   businessName,
+  businessId,
   price,
   location,
   onPress,
+  onBusinessNamePress,
   className = ''
 }: ProductCardProps) => {
   return (
@@ -43,9 +47,18 @@ export const ProductCard = ({
         </Text>
         
         {/* Business Name */}
-        <Text variant="body" className="text-gray-600 mb-2">
-          {businessName}
-        </Text>
+        <TouchableOpacity
+          onPress={() => onBusinessNamePress?.(businessId)}
+          activeOpacity={0.7}
+          disabled={!onBusinessNamePress}
+        >
+          <Text 
+            variant="body" 
+            className={`text-gray-600 mb-2 ${onBusinessNamePress ? 'underline' : ''}`}
+          >
+            {businessName}
+          </Text>
+        </TouchableOpacity>
         
         {/* Price and Location Row */}
         <View className="flex-row justify-between items-center">
