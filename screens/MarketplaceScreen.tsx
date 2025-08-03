@@ -24,7 +24,7 @@ interface MarketplaceScreenProps {
 const defaultProducts: Product[] = [
   {
     id: '1',
-    image: require('../../assets/product1.jpg'),
+    image: require('../assets/product1.png'),
     serviceName: 'Math Tutoring',
     businessName: 'Academic Excellence Center',
     price: '$25/hour',
@@ -32,7 +32,7 @@ const defaultProducts: Product[] = [
   },
   {
     id: '2',
-    image: require('../../assets/product2.jpg'),
+    image: require('../assets/product2.png'),
     serviceName: 'Science Lab Equipment',
     businessName: 'STEM Supplies Co.',
     price: '$150',
@@ -40,7 +40,7 @@ const defaultProducts: Product[] = [
   },
   {
     id: '3',
-    image: require('../../assets/product3.jpg'),
+    image: require('../assets/product3.png'),
     serviceName: 'English Literature Books',
     businessName: 'Campus Bookstore',
     price: '$45',
@@ -48,7 +48,7 @@ const defaultProducts: Product[] = [
   },
   {
     id: '4',
-    image: require('../../assets/product4.jpg'),
+    image: require('../assets/product4.png'),
     serviceName: 'Laptop Repair',
     businessName: 'Tech Solutions',
     price: '$75',
