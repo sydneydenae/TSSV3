@@ -1,13 +1,73 @@
-import { ScreenContent } from 'components/ScreenContent';
+import 'react-native-gesture-handler';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { LoginScreen } from './screens/LoginScreen';
+import { MarketplaceScreen } from 'screens/MarketplaceScreen';
 import './global.css';
+
+const Stack = createNativeStackNavigator();
+
+// Wrapper component to provide props to LoginScreen
+const LoginScreenWrapper = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (email: string, password: string) => {
+    setLoading(true);
+    try {
+      // Your login logic here
+      console.log('Login attempt:', { email, password });
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = () => {
+    console.log('Navigate to forgot password');
+  };
+
+  const handleSignUp = () => {
+    console.log('Navigate to sign up');
+  };
+
+  const handleGoogleLogin = () => {
+    console.log('Google login');
+  };
+
+  const handleAppleLogin = () => {
+    console.log('Apple login');
+  };
+
+  return (
+    <LoginScreen
+      onLogin={handleLogin}
+      onForgotPassword={handleForgotPassword}
+      onSignUp={handleSignUp}
+      onGoogleLogin={handleGoogleLogin}
+      onAppleLogin={handleAppleLogin}
+      loading={loading}
+    />
+  );
+};
 
 export default function App() {
   return (
-    <>
-      <ScreenContent title="Home" path="App.tsx"></ScreenContent>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Login" component={LoginScreenWrapper} />
+        <Stack.Screen name="Marketplace" component={MarketplaceScreen} />
+      </Stack.Navigator>
       <StatusBar style="auto" />
-    </>
+    </NavigationContainer>
   );
 }
