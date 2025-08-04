@@ -6,9 +6,11 @@ import { SearchBar } from 'components/molecules/SearchBar';
 import { CategoryTabs } from 'components/molecules/CategoryTabs';
 import { ProductCard } from 'components/molecules/ProductCard';
 import { Text } from 'components/atoms/Text';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../type';
 
 interface Product {
-  id: string;
+  productId: string;
   image: any;
   serviceName: string;
   businessName: string;
@@ -25,7 +27,7 @@ interface MarketplaceScreenProps {
 
 const defaultProducts: Product[] = [
   {
-    id: '1',
+    productId: '1',
     image: require('../assets/product1.png'),
     serviceName: 'Math Tutoring',
     businessName: 'Academic Excellence Center',
@@ -34,7 +36,7 @@ const defaultProducts: Product[] = [
     location: 'Downtown'
   },
   {
-    id: '2',
+    productId: '2',
     image: require('../assets/product2.png'),
     serviceName: 'Science Lab Equipment',
     businessName: 'STEM Supplies Co.',
@@ -43,7 +45,7 @@ const defaultProducts: Product[] = [
     location: 'University District'
   },
   {
-    id: '3',
+    productId: '3',
     image: require('../assets/product3.png'),
     serviceName: 'English Literature Books',
     businessName: 'Campus Bookstore',
@@ -52,7 +54,7 @@ const defaultProducts: Product[] = [
     location: 'Campus Center'
   },
   {
-    id: '4',
+    productId: '4',
     image: require('../assets/product4.png'),
     serviceName: 'Laptop Repair',
     businessName: 'Tech Solutions',
@@ -69,7 +71,7 @@ export const MarketplaceScreen = ({
   onProductPress,
   products = defaultProducts
 }: MarketplaceScreenProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -82,6 +84,10 @@ export const MarketplaceScreen = ({
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
     filterProducts(searchQuery, category);
+  };
+
+  const handleProductPress = (productId: string) => {
+    navigation.navigate('ProductPage', { productId: productId });
   };
 
   const filterProducts = (query: string, category: string) => {
@@ -109,16 +115,18 @@ export const MarketplaceScreen = ({
 
   const renderProduct = ({ item }: { item: Product }) => (
     <ProductCard
+      productId={item.productId}
       image={item.image}
       serviceName={item.serviceName}
       businessName={item.businessName}
       businessId={item.businessId}
       price={item.price}
       location={item.location}
-      onPress={() => onProductPress?.(item)}
-      onBusinessNamePress={(businessId) => {
-        // @ts-ignore - Navigation typing issue
-        navigation.navigate('BusinessPage', { businessId });
+      onPress={() => {
+        navigation.navigate('ProductPage', { productId: item.productId });
+      }}
+      onBusinessNamePress={() => {
+        navigation.navigate('BusinessPage', { businessId: item.businessId });
       }}
       className="mb-4"
     />
@@ -153,7 +161,7 @@ export const MarketplaceScreen = ({
       <FlatList
         data={filteredProducts}
         renderItem={renderProduct}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.productId}
         contentContainerStyle={{ padding: 16 }}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={

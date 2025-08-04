@@ -7,8 +7,10 @@ import { LoginScreen } from './screens/LoginScreen';
 import { MarketplaceScreen } from 'screens/MarketplaceScreen';
 import './global.css';
 import BusinessPage from 'screens/BusinessPage';
+import ProductPage from 'screens/ProductPage';
+import type { RootStackParamList } from './type';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 // Wrapper component to provide props to LoginScreen
 const LoginScreenWrapper = () => {
@@ -68,6 +70,7 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreenWrapper} />
         <Stack.Screen name="Marketplace" component={MarketplaceScreen} />
         <Stack.Screen name="BusinessPage" component={BusinessPage} />
+        <Stack.Screen name="ProductPage" component={ProductPage} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

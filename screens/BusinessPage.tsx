@@ -6,10 +6,12 @@ import { ProductCard } from 'components/molecules/ProductCard';
 import { Text } from 'components/atoms/Text';
 import { DetailHeader } from 'components/organisms/DetailHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import ProductPage from './ProductPage';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../type';
 
 interface Product {
-  id: string;
+  productId: string;
   image: any;
   serviceName: string;
   businessName: string;
@@ -32,7 +34,8 @@ type BusinessPageRouteProp = RouteProp<{
 
 export default function BusinessPage() {
   const route = useRoute<BusinessPageRouteProp>();
-  const navigation = useNavigation();
+  type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'BusinessPage'>;
+  const navigation = useNavigation<NavigationProp>();
   const { businessId } = route.params;
   
   const [business, setBusiness] = useState<Business | null>(null);
@@ -76,7 +79,7 @@ export default function BusinessPage() {
 
   const mockProducts: Product[] = [
     {
-      id: '1',
+      productId: '1',
       image: require('../assets/product1.png'),
       serviceName: 'Math Tutoring',
       businessName: 'Academic Excellence Center',
@@ -85,7 +88,7 @@ export default function BusinessPage() {
       location: 'Downtown'
     },
     {
-      id: '2',
+      productId: '2',
       image: require('../assets/product2.png'),
       serviceName: 'Science Lab Equipment',
       businessName: 'STEM Supplies Co.',
@@ -94,7 +97,7 @@ export default function BusinessPage() {
       location: 'University District'
     },
     {
-      id: '3',
+      productId: '3',
       image: require('../assets/product3.png'),
       serviceName: 'English Literature Books',
       businessName: 'Campus Bookstore',
@@ -103,7 +106,7 @@ export default function BusinessPage() {
       location: 'Campus Center'
     },
     {
-      id: '4',
+      productId: '4',
       image: require('../assets/product4.png'),
       serviceName: 'Laptop Repair',
       businessName: 'Tech Solutions',
@@ -140,6 +143,7 @@ export default function BusinessPage() {
   const renderProduct = ({ item }: { item: Product }) => (
     <View className="w-[48%] mb-4">
       <ProductCard
+        productId={item.productId}
         image={item.image}
         serviceName={item.serviceName}
         businessName={item.businessName}
@@ -190,7 +194,7 @@ export default function BusinessPage() {
           {/* Products Grid */}
           <FlatList
             data={products}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.productId}
             numColumns={2}
             columnWrapperStyle={{ justifyContent: 'space-between' }}
             showsVerticalScrollIndicator={false}
