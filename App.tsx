@@ -7,6 +7,7 @@ import { LoginScreen } from './screens/LoginScreen';
 import { MarketplaceScreen } from 'screens/MarketplaceScreen';
 import './global.css';
 import BusinessPage from 'screens/BusinessPage';
+import ServicePage from 'screens/ServicePage';
 import ProductPage from 'screens/ProductPage';
 import type { RootStackParamList } from './type';
 import CategoryScreen from 'screens/CategoryScreen';
@@ -76,6 +77,8 @@ export default function App() {
         <Stack.Screen name="ProductPage" component={ProductPage} />
         <Stack.Screen name="CategoryScreen" component={CategoryScreen} />
         <Stack.Screen name="ServicesScreen" component={ServicesScreen} />
+        <Stack.Screen name="ServicePage" component={ServicePage} />
+
 
       </Stack.Navigator>
       <StatusBar style="auto" />

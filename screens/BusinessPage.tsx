@@ -49,31 +49,38 @@ export default function BusinessPage() {
   const mockBusinesses: Business[] = [
     {
       id: 'business-1',
-      name: 'Academic Excellence Center',
-      location: 'Downtown, City Center',
-      type: 'Tutoring',
-      description: 'Premier tutoring center specializing in math, science, and language arts. Our experienced educators provide personalized learning experiences to help students achieve their academic goals.'
+      name: 'High Roller Club',
+      location: 'Towers',
+      type: 'Clothes',
+      description: 'An up and coming Streetwear brand.'
     },
     {
       id: 'business-2',
-      name: 'STEM Supplies Co.',
-      location: 'University District',
-      type: 'Electronics',
-      description: 'Your one-stop shop for all STEM education materials. We provide high-quality lab equipment, educational kits, and supplies for schools and universities.'
+      name: 'Jays Jewelry',
+      location: 'Campus Center',
+      type: 'Jewelry',
+      description: 'Your one-stop shop for all jewlery at the highest quality.'
     },
     {
       id: 'business-3',
-      name: 'Campus Bookstore',
-      location: 'Campus Center, Building A',
-      type: 'Retail',
-      description: 'Comprehensive bookstore serving the university community with textbooks, supplies, and general reading materials.'
+      name: 'Elles Rugs',
+      location: 'Towers',
+      type: 'Rugs',
+      description: 'Custom made rugs. Designs can be anything!'
     },
     {
       id: 'business-4',
-      name: 'Tech Solutions',
-      location: 'Tech Hub',
-      type: 'Services',
-      description: 'Professional technology services including laptop repair, software installation, and IT consulting for students and faculty.'
+      name: 'Devyn Paints',
+      location: 'Axis',
+      type: 'Art',
+      description: 'Amatuer artist. I Primaliry work on canvas with acrylics!'
+    },
+    {
+      id: 'business-5',
+      name: 'Phenom Blk',
+      location: 'Quag',
+      type: 'Hats',
+      description: 'Up and coming streetwear clothing brand specializing in beanies and hats.'
     }
   ];
 

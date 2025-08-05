@@ -21,6 +21,7 @@ interface Product {
   businessId: string;
   price: string;
   location: string;
+  description: string;
 }
 
 type ProductPageRouteProp = RouteProp<
@@ -33,40 +34,64 @@ type ProductPageRouteProp = RouteProp<
 const mockProducts: Product[] = [
   {
     id: '1',
-    image: require('../assets/product1.png'),
-    serviceName: 'Math Tutoring',
-    businessName: 'Academic Excellence Center',
+    image: require('../assets/clothes1.png'),
+    serviceName: 'HRC Tees',
+    businessName: 'High Roller Club',
     businessId: 'business-1',
-    price: '$25/hour',
-    location: 'Downtown',
+    price: '$25',
+    location: 'Towers',
+    description: "Our newest t-shirt drop! Everything made with 100% cotton."
   },
   {
     id: '2',
-    image: require('../assets/product2.png'),
-    serviceName: 'Science Lab Equipment',
-    businessName: 'STEM Supplies Co.',
-    businessId: 'business-2',
+    image: require('../assets/clothes2.png'),
+    serviceName: 'HRC Sweats',
+    businessName: 'High Roller Club',
+    businessId: 'business-1',
     price: '$150',
     location: 'University District',
+    description: 'New ultra-thick sweats in 2 colorways'
   },
   {
     id: '3',
-    image: require('../assets/product3.png'),
-    serviceName: 'English Literature Books',
-    businessName: 'Campus Bookstore',
-    businessId: 'business-3',
-    price: '$45',
+    image: require('../assets/jewelry.jpg'),
+    serviceName: 'Waist Beads',
+    businessName: 'Jays Jewelry',
+    businessId: 'business-2',
+    price: '$10',
     location: 'Campus Center',
+    description: 'Custom waist beads in any color!'
   },
   {
     id: '4',
-    image: require('../assets/product4.png'),
-    serviceName: 'Laptop Repair',
-    businessName: 'Tech Solutions',
-    businessId: 'business-4',
+    image: require('../assets/rug.jpg'),
+    serviceName: 'Stitch Rug',
+    businessName: 'Elles Rugs',
+    businessId: 'business-3',
     price: '$75',
-    location: 'Tech Hub',
+    location: 'Towers',
+    description: 'Custom made stitch Rug!'
   },
+  {
+    id: '5',
+    image: require('../assets/art.jpg'),
+    serviceName: 'Forest on Canvas',
+    businessName: 'Devyn Paints',
+    businessId: 'business-3',
+    price: '$100',
+    location: 'Axis',
+    description: 'Detailed painting of the forest inspired by Lahoa Park.'
+  },
+  {
+    id: '6',
+    image: require('../assets/hats.jpg'),
+    serviceName: 'Beanies',
+    businessName: 'Phenom Blk',
+    businessId: 'business-3',
+    price: '$40',
+    location: 'Quad',
+    description: 'New stylish beanies in multiple colorways!'
+  }
 ];
 
 export default function ProductPage() {
@@ -161,8 +186,7 @@ export default function ProductPage() {
 
           {/* Description */}
           <Text className="text-base text-gray-700 leading-relaxed">
-            This is a full description of the product. Add your detailed product
-            explanation here for the user.
+            {product.description}
           </Text>
         </View>
       </ScrollView>

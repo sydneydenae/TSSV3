@@ -36,43 +36,63 @@ const defaultServices: Service[] = [
     id: '1',
     businessName: 'Elegant Salon',
     businessType: 'Hairstylist',
-    businessLocation: 'Downtown',
+    businessLocation: 'Quad',
     images: [
-      { image: require('../assets/service1-1.png'), price: '$50' },
-      { image: require('../assets/service1-2.png'), price: '$70' },
+      { image: require('../assets/hairstyle-1.jpg'), price: '$150' },
+      { image: require('../assets/hairstyle-2.jpg'), price: '$130' },
+      { image: require('../assets/hairstyle-3.jpg'), price: '$100' },
+
     ],
   },
   {
     id: '2',
-    businessName: 'Urban Barber Shop',
+    businessName: 'Barber Shop',
     businessType: 'Barber',
-    businessLocation: 'City Center',
+    businessLocation: 'Towers',
     images: [
-      { image: require('../assets/service2-1.png'), price: '$40' },
-      { image: require('../assets/service2-2.png'), price: '$55' },
-      { image: require('../assets/service2-3.png'), price: '$65' },
+      { image: require('../assets/barber-1.jpg'), price: '$20' },
+      { image: require('../assets/barber-2.jpg'), price: '$20' },
     ],
   },
   {
     id: '3',
     businessName: 'Style & Nails',
     businessType: 'Nail Techs',
-    businessLocation: 'Suburbs',
+    businessLocation: 'CHS',
     images: [
-      { image: require('../assets/service3-1.png'), price: '$30' },
-      { image: require('../assets/service3-2.png'), price: '$45' },
+      { image: require('../assets/nails-1.jpg'), price: '$80' },
+      { image: require('../assets/nails-2.jpg'), price: '$70' },
+    ],
+  },
+  {
+    id: '4',
+    businessName: 'DJ Wildchild',
+    businessType: 'DJs',
+    businessLocation: 'Quad',
+    images: [
+      { image: require('../assets/dj-1.jpg'), price: '$200/hr' },
+    ],
+  },
+  {
+    id: '5',
+    businessName: 'Pretty Blinks',
+    businessType: 'Lash Tech',
+    businessLocation: 'CHN',
+    images: [
+      { image: require('../assets/lashes-1.jpg'), price: '$80' },
+      { image: require('../assets/lashes-1.jpg'), price: '$100' },
     ],
   },
 ];
 
-const categories = ['All', 'Hairstylist', 'Barber', 'Nail Techs', 'Makeup Artist'];
+const categories = ['All', 'Hairstylist', 'Barber', 'Nail Techs', 'Lash Techs', 'DJs'];
 
 export const ServicesScreen = ({
   onCartPress,
   services = defaultServices
 }: ServicesScreenProps) => {
   const route = useRoute();
-  const { initialCategory } = route.params as { initialCategory?: string };
+  const { initialCategory } = route.params as { initialCategory?: string }
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || 'All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -119,7 +139,7 @@ export const ServicesScreen = ({
       businessType={item.businessType}
       businessLocation={item.businessLocation}
       images={item.images}
-      onPress={() => {
+      onPress={() => {navigation.navigate('ServicePage', { serviceId: item.id })
       }}
       className="mb-4"
     />

@@ -5,4 +5,5 @@ export type RootStackParamList = {
     ServicesScreen: { initialCategory?: string };
     BusinessPage: { businessId: string };
     ProductPage: { productId: string };
+    ServicePage: {serviceId: string};
   };
