@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { Logo } from 'components/atoms/Logo';
 import { Text } from 'components/atoms/Text';
 import { Ionicons } from '@expo/vector-icons';
 

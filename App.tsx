@@ -9,6 +9,9 @@ import './global.css';
 import BusinessPage from 'screens/BusinessPage';
 import ProductPage from 'screens/ProductPage';
 import type { RootStackParamList } from './type';
+import CategoryScreen from 'screens/CategoryScreen';
+import { ServicesScreen }from 'screens/ServicesScreen';
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -71,6 +74,9 @@ export default function App() {
         <Stack.Screen name="Marketplace" component={MarketplaceScreen} />
         <Stack.Screen name="BusinessPage" component={BusinessPage} />
         <Stack.Screen name="ProductPage" component={ProductPage} />
+        <Stack.Screen name="CategoryScreen" component={CategoryScreen} />
+        <Stack.Screen name="ServicesScreen" component={ServicesScreen} />
+
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, FlatList, StatusBar } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Header } from 'components/organisms/Header';
 import { SearchBar } from 'components/molecules/SearchBar';
 import { CategoryTabs } from 'components/molecules/CategoryTabs';
@@ -8,6 +8,7 @@ import { ProductCard } from 'components/molecules/ProductCard';
 import { Text } from 'components/atoms/Text';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../type';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Product {
   productId: string;
@@ -68,14 +69,20 @@ const categories = ['All', 'Books', 'Tutoring', 'Electronics', 'Services'];
 
 export const MarketplaceScreen = ({
   onCartPress,
-  onProductPress,
   products = defaultProducts
 }: MarketplaceScreenProps) => {
+  const route = useRoute();
+  const params = route.params as { initialCategory?: string } | undefined;
+  const initialCategory = params?.initialCategory || 'All';
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(products);
 
+  useEffect(() => {
+    filterProducts(searchQuery, initialCategory);
+  }, [initialCategory]);
+    
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     filterProducts(query, selectedCategory);
@@ -84,10 +91,6 @@ export const MarketplaceScreen = ({
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
     filterProducts(searchQuery, category);
-  };
-
-  const handleProductPress = (productId: string) => {
-    navigation.navigate('ProductPage', { productId: productId });
   };
 
   const filterProducts = (query: string, category: string) => {
@@ -132,12 +135,19 @@ export const MarketplaceScreen = ({
     />
   );
 
+  const navMenuItems = [
+    { label: 'Products', onPress: () => navigation.navigate('Marketplace', { initialCategory: 'All' }) },
+    { label: 'Services', onPress: () => navigation.navigate('ServicesScreen', { initialCategory: 'All' }) },
+    { label: 'All Categories', onPress: () => navigation.navigate('CategoryScreen') },
+    { label: 'Logout', onPress: () => alert('Logged out') }
+  ];
+
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       
-      {/* Fixed Header */}
-      <Header onCartPress={onCartPress} />
+      {/* Header */}
+      <Header title="Products" onCartPress={onCartPress} navMenuItems={navMenuItems} />
       
       {/* Search and Categories Section */}
       <View className="bg-white border-b border-gray-100">
@@ -172,6 +182,6 @@ export const MarketplaceScreen = ({
           </View>
         }
       />
-    </View>
+    </SafeAreaView>
   );
 }; 

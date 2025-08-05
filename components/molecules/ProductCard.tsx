@@ -4,18 +4,20 @@ import { Text } from 'components/atoms/Text';
 import { Ionicons } from '@expo/vector-icons';
 
 interface ProductCardProps {
+  productId: string;
   image: ImageSourcePropType;
   serviceName: string;
   businessName: string;
   businessId: string;
   price: string;
   location: string;
-  onPress?: () => void;
+  onPress?: (productId: string) => void;
   onBusinessNamePress?: (businessId: string) => void;
   className?: string;
 }
 
 export const ProductCard = ({
+  productId,
   image,
   serviceName,
   businessName,
@@ -28,7 +30,7 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={() => onPress?.(productId)}
       activeOpacity={0.8}
       className={`bg-white rounded-lg shadow-sm border border-gray-100 ${className}`}
     >

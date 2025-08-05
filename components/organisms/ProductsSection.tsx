@@ -4,7 +4,7 @@ import { Text } from 'components/atoms/Text';
 import { ProductCard } from 'components/molecules/ProductCard';
 
 interface Product {
-  id: string;
+  productId: string;
   image: any;
   serviceName: string;
   businessName: string;
@@ -27,6 +27,7 @@ export const ProductsSection = ({
   const renderProduct = ({ item, index }: { item: Product; index: number }) => (
     <View className={`w-[48%] ${index % 2 === 0 ? 'mr-2' : 'ml-2'}`}>
       <ProductCard
+        productId={item.productId}
         image={item.image}
         serviceName={item.serviceName}
         businessName={item.businessName}
@@ -50,7 +51,7 @@ export const ProductsSection = ({
       <FlatList
         data={products}
         renderItem={renderProduct}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.productId}
         numColumns={2}
         columnWrapperStyle={{ justifyContent: 'space-between' }}
         showsVerticalScrollIndicator={false}
